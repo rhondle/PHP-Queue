@@ -5,9 +5,9 @@
 * Implements simple a disk-based stack that scales elegantly
 * to millons or billions of entries.
 *
-* @author		Marty Anstey (https://marty.anstey.ca/)
-* @license		AGPL v3 (http://www.gnu.org/licenses/agpl-3.0.txt)
-* @version		2.0
+* @author	Marty Anstey (https://marty.anstey.ca/)
+* @license	AGPL v3 (http://www.gnu.org/licenses/agpl-3.0.txt)
+* @version	2.0
 * @copyright	Marty Anstey, July 12 2013
 *
 */
@@ -20,14 +20,14 @@ class stack {
 			case 64:
 				$this->enc = array(8, 'P');
 				break;
-			case 32:											// defaults to 32 bit platforms
-			default:											// for compatibility
+			case 32:						// defaults to 32 bit platforms
+			default:						// for compatibility
 				$this->enc = array(4, 'V');
 		}
 		$fexists = file_exists($fn);
 		if (!$this->fp = @fopen($fn, 'c+b'))
 			throw new Exception("Can't create or open file");
-		if (!$fexists) {										// initialize new stack file
+		if (!$fexists) {						// initialize new stack file
 			fwrite($this->fp, pack($this->enc[1], $this->enc[0]), $this->enc[0]);
 		}
 	}
@@ -40,7 +40,7 @@ class stack {
 	* Pushes a new entry onto the stack
 	*
 	* @param string $data		Data to add to the queue
-	* @return bool				Always returns TRUE
+	* @return bool			Always returns TRUE
 	*/
 	public function push($str) {
 		rewind($this->fp);
