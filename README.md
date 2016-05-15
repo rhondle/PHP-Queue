@@ -2,7 +2,32 @@
 Tested on PHP 5.3 and PHP 7.0
 
 ### Stacks
+This library implements a fast and simple disk-based stack that scales elegantly.
 
+Example:
+```
+$stack = new stack('test.stack');
+
+// push an item onto the stack
+$stack->push('Hello');
+
+// and another
+$stack->push('World');
+
+// and a few more
+for ($i=0;$i<10;$i++)
+	$stack->push('test'.$i);
+
+// pop an item off the top
+print $stack->pop()."\n";
+
+// loop through the remaining stack items
+do {
+	$s = $stack->pop();
+	print "$s\n";
+} while ($s!==false);
+
+```
 
 ### Queues
 A simple and efficient disk-based queue implementation for PHP
