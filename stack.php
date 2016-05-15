@@ -28,7 +28,7 @@ class stack {
 		if (!$this->fp = @fopen($fn, 'c+b'))
 			throw new Exception("Can't create or open file");
 		if (!$fexists) {						// initialize new stack file
-			fwrite($this->fp, pack($this->enc[1], $this->enc[0]), $this->enc[0]);
+			fwrite($this->fp, pack($this->enc[1], 0), $this->enc[0]);
 		}
 	}
 
@@ -61,7 +61,7 @@ class stack {
 	public function pop() {
 		rewind($this->fp);
 		$ofs = unpack($this->enc[1], fread($this->fp, $this->enc[0]))[1];
-		if ($ofs<=$this->enc[0]) return FALSE;
+		if ($ofs<=$this->enc[0]-1) return FALSE;
 		fseek($this->fp, $ofs, SEEK_SET);
 		$opos = unpack($this->enc[1], fread($this->fp, $this->enc[0]))[1];
 		$str = fgets($this->fp);
