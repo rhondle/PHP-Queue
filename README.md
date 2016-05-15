@@ -34,7 +34,7 @@ A simple and efficient disk-based queue implementation for PHP
 
 This class provides a simple disk-based queue that can easily support millions or even billions of entries.
 
-The queue file must be periodically "vacummed" to remove stale entries, otherwise the file will grow indefinitely.
+The queue file must be periodically "vacuumed" to remove stale entries, otherwise the file will grow indefinitely. This could be implemented in a number of ways, for example every n entries fetched from the queue. A future code enhancement could return the current file pointer, which could in turn be compared to the current file size to determine if a vacuum is needed.
 
 Example:
 ```
