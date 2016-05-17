@@ -97,7 +97,7 @@ class queue {
 		if ($ofs>=filesize($this->fn)) {			// if the queue is empty
 			fclose($fp);					// then just
 			unlink($this->fn);				// delete the file
-			return TRUE;
+			return $this->open($this->fn);			// then create new queue file
 		}
 		$fp2 = fopen($this->fn.'.tmp', 'wb');
 		$this->add_header($fp2);
@@ -106,7 +106,7 @@ class queue {
 			fclose($fp2);
 			unlink($this->fn);				// delete original file
 			rename($this->fn.'.tmp', $this->fn);		// move the temporary one in it's place
-			return $this->open($this->fn);
+			return $this->open($this->fn);			// reopen queue file
 		}
 		else
 		{
