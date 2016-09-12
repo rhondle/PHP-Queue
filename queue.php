@@ -63,7 +63,9 @@ class queue {
 		if ($count<1) return FALSE;
 		rewind($this->fp);
 		$ofs = unpack($this->enc[1], fread($this->fp, $this->enc[0]))[1];
-		//if ($ofs>=filesize($this->fn)) {}			// TODO
+		if ($ofs>=filesize($this->fn)) {			// if queue is empty
+			return FALSE;
+		}
 		fseek($this->fp, $ofs, SEEK_SET);
 		for ($i=0; $i<$count; $i++) {
 			$str = fgets($this->fp);			// read a string
